@@ -58,14 +58,12 @@ public class NumberboxInput {
 
 void makeEditable( Numberbox n ) {
   // allows the user to click a numberbox and type in a number which is confirmed with RETURN
-  
   final NumberboxInput nin = new NumberboxInput( n ); // custom input handler for the numberbox
-  
   // control the active-status of the input handler when releasing the mouse button inside 
   // the numberbox. deactivate input handler when mouse leaves.
   n.onClick(new CallbackListener() {
     public void controlEvent(CallbackEvent theEvent) {
-      nin.setActive( true ); 
+      nin.setActive( true );
     }
   }
   ).onLeave(new CallbackListener() {

@@ -42,4 +42,5 @@ void keyPressed(){
   if (key == 'l') {println("Right sobel");}
   if (key == 'ñ') {println("Sharpen");}
   if (key == 'm') {println("Top Sobel");}
+  if (key == 'z') {println("Kernel Values");}
 }

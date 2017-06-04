@@ -58,10 +58,10 @@ void giveMeDahNumberBoxes(){
 
 void giveDahButton(){
   cp5.addButton("Aplicar kernel")
-   .setValue(128)
-   .setPosition(105,195)
-   //.setImages(imgs)
-   .updateSize()
+     .setValue(128)
+     .setPosition(90,235)
+     //.setImages(imgs)
+     .updateSize()
    ;
 
   

@@ -1,45 +1,45 @@
 void keyPressed() {
-  if (key == '1') {
+  if (key == 'q') {
     println("No lights, no texture shading");
     selShader = colorShader;
     useLight = false;
     useTexture = false;        
-  } else if (key == '2') {
+  } else if (key == 'w') {
     println("Vertex lights, no texture shading");
     selShader = lightShader;
     useLight = true;
     useTexture = false;    
-  } else if (key == '3') {
+  } else if (key == 'e') {
     println("No lights, texture shading");
     selShader = texShader;
     useLight = false;
     useTexture = true;     
-  } else if (key == '4') {
+  } else if (key == 'r') {
     println("Vertex lights, texture shading");
     selShader = texlightShader;
     useLight = true;
     useTexture = true;    
-  } else if (key == '5') {
+  } else if (key == 't') {
     println("Pixel lights, no texture shading");
     selShader = pixlightShader;
     useLight = true;
     useTexture = false; 
-  } else if (key == '6') {
+  } else if (key == 'y') {
     println("Pixel lights, texture shading");
     selShader = texlightxShader;
     useLight = true;
     useTexture = true;      
-  } else if (key == '7') {
+  } else if (key == 'u') {
     println("Black&white texture filtering");
     selShader = bwShader;
     useLight = false;
     useTexture = true;    
-  } else if (key == '8') {
+  } else if (key == 'i') {
     println("Edge detection filtering");
     selShader = edgesShader;
     useLight = false;
     useTexture = true;    
-  } else if (key == '9') {
+  } else if (key == 'o') {
     println("Emboss filtering");
     selShader = embossShader;
     useLight = false;

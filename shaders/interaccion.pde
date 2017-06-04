@@ -1,5 +1,6 @@
 void keyPressed() {
   if (key == 'q') {
+    label = loadImage("magritte2.jpg");
     println("No lights, no texture shading");
     selShader = colorShader;
     useLight = false;
@@ -45,6 +46,7 @@ void keyPressed() {
     useLight = false;
     useTexture = true;     
   }else if (key == 'a') {
+    label = loadImage("magritte.jpg");
     println("Bicubic");
     selShader = bicubic;
     bicubic.set("sketchSize", float(width), float(height));
@@ -56,16 +58,37 @@ void keyPressed() {
     useLight = false;
     useTexture = true;     
   }else if (key == 's') {
-    println("Emboss filtering");
-    selShader = embossShader;
+    println("Bilateral");
+    label = loadImage("magritte.jpg");
+    selShader = bilateral;
+    bilateral.set("sketchSize", float(width), float(height));
     useLight = false;
-    useTexture = true;     
+    useTexture = true;
+    filter( bilateral );
   }else if (key == 'd') {
+    println("ContrastSaturationBrightness");
+    label = loadImage("magritte2.jpg");
+    selShader = ContrastSaturationBrightness;
+    float c = 1.0; // Contrast is maximum
+    float s = map( mouseX / (float) width,  0.0, 1.0, 0.0, 1.5 ); // map the saturation to the horizontal position of the cursor
+    float b = map( mouseY / (float) height, 0.0, 1.0, 0.3, 1.5 ); // map the brightness to the vertical position of the cursor
+    ContrastSaturationBrightness.set( "contrast",   c );
+    ContrastSaturationBrightness.set( "saturation", s );
+    ContrastSaturationBrightness.set( "brightness", b );
+    useLight = false;
+    useTexture = true;
+    filter(ContrastSaturationBrightness);
+  }else if (key == 'f') {
     println("Emboss filtering");
     selShader = embossShader;
     useLight = false;
     useTexture = true;     
-  }else if (key == 'f') {
+  }else if (key == 'g') {
+    println("Emboss filtering");
+    selShader = embossShader;
+    useLight = false;
+    useTexture = true;     
+  }else if (key == 'h') {
     println("Emboss filtering");
     selShader = embossShader;
     useLight = false;

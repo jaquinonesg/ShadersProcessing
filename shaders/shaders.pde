@@ -21,6 +21,8 @@ PShader bwShader;
 PShader edgesShader;
 PShader embossShader;
 PShader bicubic;
+PShader bilateral;
+PShader ContrastSaturationBrightness;
 
 void setup() {
   size(480, 480, P3D);  
@@ -40,6 +42,8 @@ void setup() {
   edgesShader = loadShader("edgesfrag.glsl");
   embossShader = loadShader("embossfrag.glsl");
   bicubic = loadShader("bicubic.glsl");
+  bilateral = loadShader( "bilateral.glsl" );
+  ContrastSaturationBrightness = loadShader("ContrastSaturationBrightness.glsl");
   
   selShader = texlightShader;
   useLight = true;

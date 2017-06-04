@@ -55,3 +55,14 @@ void giveMeDahNumberBoxes(){
   makeEditable(n7);
   makeEditable(n8);
 }
+
+void giveDahButton(){
+  cp5.addButton("Aplicar kernel")
+   .setValue(128)
+   .setPosition(105,195)
+   //.setImages(imgs)
+   .updateSize()
+   ;
+
+  
+}

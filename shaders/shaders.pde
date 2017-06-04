@@ -26,6 +26,7 @@ PShader ContrastSaturationBrightness;
 PShader dithering;
 PShader fisheyePincushion;
 PShader steinberg;
+PShader gaussianBlur;
 
 void setup() {
   size(480, 480, P3D);  
@@ -50,6 +51,7 @@ void setup() {
   dithering = loadShader( "dithering.glsl" );
   fisheyePincushion = loadShader( "fisheyePincushion.glsl" );
   steinberg = loadShader("steinberg.glsl");
+  gaussianBlur = loadShader("gaussianBlur.glsl");
   
   selShader = texlightShader;
   useLight = true;
@@ -91,5 +93,32 @@ void draw() {
     useLight = false;
     useTexture = true;
     filter(steinberg);
+  }else if (key == 'j') {
+    println("gaussianBlur");
+    selShader = gaussianBlur;
+    gaussianBlur.set("sketchSize", (float)width, (float)height);
+    gaussianBlur.set("kernelSize", 32);
+    gaussianBlur.set("strength", 7.0);
+    float strength = map( mouseX, 0.0, width, 0.1, 9.0);
+    int kernelSize = (int) map( mouseY, 0.0, height, 3.0, 32.0);
+    gaussianBlur.set("strength", strength); 
+    gaussianBlur.set("kernelSize", kernelSize);
+    // Vertical pass
+    gaussianBlur.set("horizontalPass", 0);
+    filter(gaussianBlur);
+    // Horizontal pass
+    gaussianBlur.set("horizontalPass", 1);
+    filter(gaussianBlur);
+  
+  // Show the values on screen
+    //noStroke();
+    //fill(0, 100);
+    //rect(5,5,130,45);
+    //fill(255);
+    //text("kernel size =" + kernelSize, 10, 20);
+    //text("blur strength =" + nf(strength, 1, 2), 10, 40);
+    useLight = false;
+    useTexture = true;
+    filter(gaussianBlur);
   }
 }

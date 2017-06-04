@@ -1,44 +1,85 @@
-
-// Hold mouse click to disable the filter temporarily
-
-// The videoclip is from NASA: http://youtu.be/CBwdZ1yloHA
-
+// Codigo trabajado a partir de algunos ejemplos del repositorio https://github.com/SableRaf/Filters4Processing 
 import processing.video.*;
 Movie movie;
-
-// Create the shader object
+PImage noiseImage;
 PShader barrelBlurChroma;
+PShader steinberg;
+PShader bicubic;
+PShader bilateral;
+PShader ContrastSaturationBrightness;
+PShader dithering;
+PShader fisheyePincushion;
 
-// How much barrel effect do we want?
-// Values between 0.5 and 3.0 work best, but feel free to try other values
 float barrel = 2.2;
 
 void setup() {
-
-  size(640, 360, P2D);
- 
-  // Load and play the video in a loop
-  movie = new Movie(this, "iss.mov");
+  size(1280, 720, P2D);
+  movie = new Movie(this, "cat.mp4");
   movie.loop();
   
-  // Load and configure the shader
   barrelBlurChroma = loadShader("barrelBlurChroma.glsl");
-  barrelBlurChroma.set("sketchSize", float(width), float(height));
-  barrelBlurChroma.set("barrelPower", barrel);
+  steinberg = loadShader("steinberg.glsl");
+  bicubic = loadShader( "bicubic.glsl" );
+  bilateral = loadShader( "bilateral.glsl" );
+  ContrastSaturationBrightness = loadShader("ContrastSaturationBrightness.glsl");
+  dithering = loadShader( "dithering.glsl" );
+  fisheyePincushion = loadShader( "fisheyePincushion.glsl" );
 
 }
 
-// Read each new frame of the movie
+void draw() {  
+  image(movie, 0, 0, width, height);
+  if (key == 'q') {
+    barrelBlurChroma.set("sketchSize", float(width), float(height));
+    barrelBlurChroma.set("barrelPower", barrel);
+    filter(barrelBlurChroma);
+  }else if (key == 'w') {
+    steinberg.set("sketchSize", (float)width, (float)height);
+    barrelBlurChroma.set("barrelPower", barrel);
+    filter(steinberg);
+  }else if (key == 'e') {
+    bicubic.set("sketchSize", float(width), float(height));
+    bicubic.set("mode", mousePressed ? 0 : 1);
+    float oscillation = map( sin(frameCount*0.005), -1.0, 1.0, 0.1, 0.5 );
+    bicubic.set("zoomLevel", oscillation );
+    filter(bicubic);
+  }else if (key == 'r') {
+    bilateral.set("sketchSize", float(width), float(height));
+    filter( bilateral );
+  }else if (key == 't') {
+    float c = 1.0; // Contrast is maximum
+    float s = map( mouseX / (float) width,  0.0, 1.0, 0.0, 1.5 ); // map the saturation to the horizontal position of the cursor
+    float b = map( mouseY / (float) height, 0.0, 1.0, 0.3, 1.5 ); // map the brightness to the vertical position of the cursor
+    ContrastSaturationBrightness.set( "contrast",   c );
+    ContrastSaturationBrightness.set( "saturation", s );
+    ContrastSaturationBrightness.set( "brightness", b );
+    filter(ContrastSaturationBrightness);
+  }else if (key == 'y') {
+    noiseImage  = loadImage( "noise.png" );
+    dithering.set("sketchSize", float(width), float(height));
+    dithering.set("noiseTexture", noiseImage);
+    filter( dithering );
+  }else if (key == 'u') {
+    fisheyePincushion.set("sketchSize", float(width), float(height));
+    fisheyePincushion.set("amount", sin(frameCount * 0.01) * 0.5 );
+    filter( fisheyePincushion );
+ 
+  }
+
+  
+}
+
 void movieEvent(Movie m) {
   m.read();
 }
 
-void draw() {  
+void keyPressed(){
+if (key == 'q') {println("BarrelBlurChroma");}
+else if (key == 'w') {println("FloydSteinberg");}
+else if (key == 'e') {println("Bicubic");}
+else if (key == 'r') {println("Bilateral");}
+else if (key == 't') {println("ContrastSaturationBrightness");}
+else if (key == 'y') {println("Dithering");}
+else if (key == 'u') {println("fisheyePincushion");}
 
-  image(movie, 0, 0, width, height);
-
-  if( !mousePressed ) {
-    filter(barrelBlurChroma);
-  }
-  
 }

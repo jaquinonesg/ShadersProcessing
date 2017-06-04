@@ -38,7 +38,6 @@ void draw() {
   stroke(0);
   noFill();
   rect(xstart,ystart,w,w);
-  println(n0.getValue());
 }
 
 void keyPressed(){
@@ -51,5 +50,5 @@ void keyPressed(){
   if (key == 'l') {println("Right sobel");}
   if (key == 'ñ') {println("Sharpen");}
   if (key == 'm') {println("Top Sobel");}
-  if (key == 'z') {println("Kernel Values");}
+  if (key == 'z') {println("Input kernel");}
 }

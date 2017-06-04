@@ -67,6 +67,22 @@ void changeKernel(int xstart,int ystart,int xend,int yend,int matrixsize){
 
     applyMatrix(xstart,ystart,xend,yend, matrix, matrixsize);
   }
+  if (key == 'z') {
+    float a0 = n0.getValue();
+    float a1 = n1.getValue();
+    float a2 = n2.getValue();
+    float a3 = n3.getValue();
+    float a4 = n4.getValue();
+    float a5 = n5.getValue();
+    float a6 = n6.getValue();
+    float a7 = n7.getValue();
+    float a8 = n8.getValue();
+    float[][] matrix = { { a0, a1, a2 },
+                         { a3, a4, a5 },
+                         { a6, a7, a8 } }; 
+
+    applyMatrix(xstart,ystart,xend,yend, matrix, matrixsize);
+  }
   
 }
 

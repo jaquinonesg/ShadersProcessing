@@ -8,10 +8,19 @@ float[][] matrix = { { -1, -1, -1 },
                      { -1,  9, -1 },
                      { -1, -1, -1 } }; 
 
+float[][] matrix1 = { { 1/9, 1/9, 1/9 },
+                     { 1/9,  1/9, 1/9 },
+                     { 1/9, 1/9, 1/9 } }; 
+
+float[][] matrix3 = { { 0, 0, 0 },
+                     { 0,  1, 0 },
+                     { 0, 0, 0 } }; 
+
+
 void setup() {
-  size(200, 200);
+  size(960, 720);
   frameRate(30);
-  img = loadImage("sunflower.jpg");
+  img = loadImage("un.jpg");
 }
 
 void draw() {

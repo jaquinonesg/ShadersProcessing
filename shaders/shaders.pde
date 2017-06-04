@@ -2,7 +2,7 @@
 //Ejemplo 9.1
 
 float canSize = 60;
-PImage label;
+PImage label, noiseImage;
 PShape can;
 PShape cap;
 float angle;
@@ -23,6 +23,8 @@ PShader embossShader;
 PShader bicubic;
 PShader bilateral;
 PShader ContrastSaturationBrightness;
+PShader dithering;
+PShader fisheyePincushion;
 
 void setup() {
   size(480, 480, P3D);  
@@ -44,6 +46,8 @@ void setup() {
   bicubic = loadShader("bicubic.glsl");
   bilateral = loadShader( "bilateral.glsl" );
   ContrastSaturationBrightness = loadShader("ContrastSaturationBrightness.glsl");
+  dithering = loadShader( "dithering.glsl" );
+  fisheyePincushion = loadShader( "fisheyePincushion.glsl" );
   
   selShader = texlightShader;
   useLight = true;
@@ -57,4 +61,26 @@ void draw() {
   float y = 2 * canSize + (2 * canSize + 5);
   drawCan(x, y, angle);        
   angle += 0.01;
+  if (key == 'd') {
+    println("ContrastSaturationBrightness");
+    label = loadImage("magritte2.jpg");
+    selShader = ContrastSaturationBrightness;
+    float c = 1.0; // Contrast is maximum
+    float s = map( mouseX / (float) width,  0.0, 1.0, 0.0, 1.5 ); // map the saturation to the horizontal position of the cursor
+    float b = map( mouseY / (float) height, 0.0, 1.0, 0.3, 1.5 ); // map the brightness to the vertical position of the cursor
+    ContrastSaturationBrightness.set( "contrast",   c );
+    ContrastSaturationBrightness.set( "saturation", s );
+    ContrastSaturationBrightness.set( "brightness", b );
+    useLight = false;
+    useTexture = true;
+    filter(ContrastSaturationBrightness);
+   }else if (key == 'g') {
+    println("fisheyePincushion");
+    selShader = fisheyePincushion;
+    fisheyePincushion.set("sketchSize", float(width), float(height));
+    fisheyePincushion.set("amount", sin(frameCount * 0.01) * 0.5 );
+    useLight = false;
+    useTexture = true;
+    filter( fisheyePincushion );
+  }
 }

@@ -27,7 +27,7 @@ public class NumberboxInput {
       }
       else if(k.getKey()<255) {
         // check if the input is a valid (decimal) number
-        final String regex = "\\d+([.]\\d{0,2})?";
+        final String regex = "\\d+([.]\\d{0,4})?";
         String s = text + k.getKey();
         if ( java.util.regex.Pattern.matches(regex, s ) ) {
           text += k.getKey();

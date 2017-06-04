@@ -1,5 +1,10 @@
 // Codigo trabajado a partir de algunos ejemplos del repositorio https://github.com/SableRaf/Filters4Processing 
 import processing.video.*;
+import controlP5.*;
+ControlP5 cp5;
+Numberbox n0,n1,n2,n3,n4,n5,n6,n7,n8;
+int w = 150;
+
 Movie movie;
 PImage noiseImage;
 PShader barrelBlurChroma;
@@ -63,11 +68,24 @@ void draw() {
     fisheyePincushion.set("sketchSize", float(width), float(height));
     fisheyePincushion.set("amount", sin(frameCount * 0.01) * 0.5 );
     filter( fisheyePincushion );
- 
+  }else if (key == 'u') {
+    
+    int xstart = constrain(mouseX-w/2,0,img.width);
+    int ystart = constrain(mouseY-w/2,0,img.height);
+    int xend = constrain(mouseX+w/2,0,img.width);
+    int yend = constrain(mouseY+w/2,0,img.height);
+    int matrixsize = 3;
+    loadPixels();
+    //Blur
+    float[][] matrix = { { 0.0625, 0.125, 0.0625 },
+                         { 0.125,  0,25, 0.125 },
+                         { 0.0625, 0.125, 0.0625 } };
+    applyMatrix(xstart,ystart,xend,yend, matrix, matrixsize);
   }
+}
 
   
-}
+
 
 void movieEvent(Movie m) {
   m.read();

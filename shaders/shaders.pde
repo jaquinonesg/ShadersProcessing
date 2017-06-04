@@ -25,6 +25,7 @@ PShader bilateral;
 PShader ContrastSaturationBrightness;
 PShader dithering;
 PShader fisheyePincushion;
+PShader steinberg;
 
 void setup() {
   size(480, 480, P3D);  
@@ -48,6 +49,7 @@ void setup() {
   ContrastSaturationBrightness = loadShader("ContrastSaturationBrightness.glsl");
   dithering = loadShader( "dithering.glsl" );
   fisheyePincushion = loadShader( "fisheyePincushion.glsl" );
+  steinberg = loadShader("steinberg.glsl");
   
   selShader = texlightShader;
   useLight = true;
@@ -82,5 +84,12 @@ void draw() {
     useLight = false;
     useTexture = true;
     filter( fisheyePincushion );
+  }else if (key == 'h') {
+    println("steinberg");
+    selShader = steinberg;
+    steinberg.set("sketchSize", (float)width, (float)height);
+    useLight = false;
+    useTexture = true;
+    filter(steinberg);
   }
 }

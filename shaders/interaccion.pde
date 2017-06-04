@@ -75,11 +75,5 @@ void keyPressed() {
     useLight = false;
     useTexture = true;     
     filter( dithering );
-
-  }else if (key == 'h') {
-    println("Emboss filtering");
-    selShader = embossShader;
-    useLight = false;
-    useTexture = true;     
   }
 }

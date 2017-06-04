@@ -3,7 +3,6 @@ int w = 150;
 
 // It's possible to perform a convolution
 // the image with different matrices
-
 float[][] matrix2 = { { -1, -1, -1 },
                      { -1,  9, -1 },
                      { -1, -1, -1 } }; 
@@ -19,7 +18,6 @@ float[][] matrix3 = { { 1/9, 1/9, 1/9 },
 float[][] matrix1 = { { 0, 0, -1 },
                      { 0,  0, 0 },
                      { -1, 0, 0 } }; 
-
 
 void setup() {
   size(960, 720);
@@ -39,12 +37,67 @@ void draw() {
   int matrixsize = 3;
   loadPixels();
   if (key == '1') {
-    float[][] matrix = { { -1, -1, -1 },
-                     { -1,  8, -1 },
-                     { -1, -1, -1 } };     
+    //Identidad
+    float[][] matrix = { { 0, 0, 0 },
+                         { 0, 1, 0 },
+                         { 0, 0, 0 } }; 
+    applyMatrix(xstart,ystart,xend,yend, matrix, matrixsize);
   }
-  // Begin our loop for every pixel
-  for (int x = xstart; x < xend; x++) {
+  if (key == '2') {
+    //Blur
+    float[][] matrix = { { 0.0625, 0.125, 0.0625 },
+                         { 0.125,  0,25, 0.125 },
+                         { 0.0625, 0.125, 0.0625 } };
+    applyMatrix(xstart,ystart,xend,yend, matrix, matrixsize);
+  }
+  if (key == '3') {
+    //bottom sobel
+    float[][] matrix = { { -1, -2, -1 },
+                         {  0,  0,  0 },
+                         {  1,  2,  1 } }; 
+
+    applyMatrix(xstart,ystart,xend,yend, matrix, matrixsize);
+  }
+  if (key == '4') {
+    //emboss
+    float[][] matrix = { { -2, -1, 0 },
+                         { -1,  1, 1 },
+                         {  0,  1, 2 } }; 
+    applyMatrix(xstart,ystart,xend,yend, matrix, matrixsize);
+  }
+  if (key == '5') {
+    //left sobel
+    float[][] matrix = { { 0, 0, -1 },
+                         { 0,  0, 0 },
+                         { -1, 0, 0 } }; 
+
+    applyMatrix(xstart,ystart,xend,yend, matrix, matrixsize);
+  }
+  if (key == '6') {
+    float[][] matrix = { { 0, 0, -1 },
+                         { 0,  0, 0 },
+                         { -1, 0, 0 } }; 
+
+    applyMatrix(xstart,ystart,xend,yend, matrix, matrixsize);
+  }
+  if (key == '7') {
+    float[][] matrix = { { 0, 0, -1 },
+                         { 0,  0, 0 },
+                         { -1, 0, 0 } }; 
+
+    applyMatrix(xstart,ystart,xend,yend, matrix, matrixsize);
+  }
+  
+  
+
+  stroke(0);
+  noFill();
+  rect(xstart,ystart,w,w);
+}
+
+void applyMatrix(int xstart,int ystart,int xend,int yend,float[][] matrix,int matrixsize){
+   // Begin our loop for every pixel
+   for (int x = xstart; x < xend; x++) {
     for (int y = ystart; y < yend; y++ ) {
       // Each pixel location (x,y) gets passed into a function called convolution() 
       // which returns a new color value to be displayed.
@@ -54,10 +107,6 @@ void draw() {
     }
   }
   updatePixels();
-
-  stroke(0);
-  noFill();
-  rect(xstart,ystart,w,w);
 }
 
 color convolution(int x, int y, float[][] matrix, int matrixsize, PImage img) {

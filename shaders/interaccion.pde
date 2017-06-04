@@ -44,5 +44,33 @@ void keyPressed() {
     selShader = embossShader;
     useLight = false;
     useTexture = true;     
+  }else if (key == 'a') {
+    println("Barrer");
+    selShader = barrelShader;
+    barrelShader.set("sketchSize", float(width), float(height));
+    barrelShader.set("mode", mousePressed ? 0 : 1);
+    float oscillation = map( sin(frameCount*0.005), -1.0, 1.0, 0.1, 0.5 );
+    println(oscillation);
+    barrelShader.set("zoomLevel", oscillation );
+    // Applies the shader to everything that has already been drawn
+    filter( barrelShader );
+
+    useLight = false;
+    useTexture = true;     
+  }else if (key == 's') {
+    println("Emboss filtering");
+    selShader = embossShader;
+    useLight = false;
+    useTexture = true;     
+  }else if (key == 'd') {
+    println("Emboss filtering");
+    selShader = embossShader;
+    useLight = false;
+    useTexture = true;     
+  }else if (key == 'f') {
+    println("Emboss filtering");
+    selShader = embossShader;
+    useLight = false;
+    useTexture = true;     
   }
 }

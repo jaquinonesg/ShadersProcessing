@@ -20,6 +20,7 @@ PShader texlightxShader;
 PShader bwShader;
 PShader edgesShader;
 PShader embossShader;
+PShader barrelShader;
 
 void setup() {
   size(480, 480, P3D);  
@@ -38,6 +39,7 @@ void setup() {
   bwShader = loadShader("bwfrag.glsl");
   edgesShader = loadShader("edgesfrag.glsl");
   embossShader = loadShader("embossfrag.glsl");
+  barrelShader = loadShader("barrelBlurChroma.glsl");
   
   selShader = texlightShader;
   useLight = true;

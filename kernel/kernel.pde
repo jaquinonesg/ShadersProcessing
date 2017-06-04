@@ -3,21 +3,6 @@ int w = 150;
 
 // It's possible to perform a convolution
 // the image with different matrices
-float[][] matrix2 = { { -1, -1, -1 },
-                     { -1,  9, -1 },
-                     { -1, -1, -1 } }; 
-
-float[][] matrix = { { -1, -1, -1 },
-                     { -1,  8, -1 },
-                     { -1, -1, -1 } }; 
-
-float[][] matrix3 = { { 1/9, 1/9, 1/9 },
-                     { 1/9,  1/9, 1/9 },
-                     { 1/9, 1/9, 1/9 } }; 
-
-float[][] matrix1 = { { 0, 0, -1 },
-                     { 0,  0, 0 },
-                     { -1, 0, 0 } }; 
 
 void setup() {
   size(960, 720);
@@ -67,27 +52,45 @@ void draw() {
   }
   if (key == '5') {
     //left sobel
-    float[][] matrix = { { 0, 0, -1 },
-                         { 0,  0, 0 },
-                         { -1, 0, 0 } }; 
+    float[][] matrix = { { 1, 0, -1 },
+                         { 2, 0, -2 },
+                         { 1, 0, -1 } }; 
 
     applyMatrix(xstart,ystart,xend,yend, matrix, matrixsize);
   }
   if (key == '6') {
-    float[][] matrix = { { 0, 0, -1 },
-                         { 0,  0, 0 },
-                         { -1, 0, 0 } }; 
-
+    //outline
+    float[][] matrix = { { -1, -1, -1 },
+                         { -1,  8, -1 },
+                         { -1, -1, -1 } }; 
     applyMatrix(xstart,ystart,xend,yend, matrix, matrixsize);
   }
   if (key == '7') {
-    float[][] matrix = { { 0, 0, -1 },
-                         { 0,  0, 0 },
-                         { -1, 0, 0 } }; 
+    //right sobel
+    float[][] matrix = { { -1, 0, 1 },
+                         { -2, 0, 2 },
+                         { -1, 0, 1 } }; 
 
     applyMatrix(xstart,ystart,xend,yend, matrix, matrixsize);
   }
-  
+  if (key == '8') {
+    //sharpen
+    float[][] matrix = { {  0, -1, 0 },
+                         { -1, 5, -1 },
+                         {  0, -1, 0 } }; 
+
+    applyMatrix(xstart,ystart,xend,yend, matrix, matrixsize);
+  }
+  if (key == '9') {
+    //top sobel
+    float[][] matrix = { {  1,  2,  1 },
+                         {  0,  0,  0 },
+                         { -1, -2, -1 } }; 
+
+    applyMatrix(xstart,ystart,xend,yend, matrix, matrixsize);
+  }
+
+
   
 
   stroke(0);

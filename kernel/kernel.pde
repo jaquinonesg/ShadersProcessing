@@ -1,20 +1,24 @@
 PImage img;
-int w = 80;
+int w = 150;
 
 // It's possible to perform a convolution
 // the image with different matrices
 
-float[][] matrix = { { -1, -1, -1 },
+float[][] matrix2 = { { -1, -1, -1 },
                      { -1,  9, -1 },
                      { -1, -1, -1 } }; 
 
-float[][] matrix1 = { { 1/9, 1/9, 1/9 },
+float[][] matrix = { { -1, -1, -1 },
+                     { -1,  8, -1 },
+                     { -1, -1, -1 } }; 
+
+float[][] matrix3 = { { 1/9, 1/9, 1/9 },
                      { 1/9,  1/9, 1/9 },
                      { 1/9, 1/9, 1/9 } }; 
 
-float[][] matrix3 = { { 0, 0, 0 },
-                     { 0,  1, 0 },
-                     { 0, 0, 0 } }; 
+float[][] matrix1 = { { 0, 0, -1 },
+                     { 0,  0, 0 },
+                     { -1, 0, 0 } }; 
 
 
 void setup() {
@@ -34,6 +38,11 @@ void draw() {
   int yend = constrain(mouseY+w/2,0,img.height);
   int matrixsize = 3;
   loadPixels();
+  if (key == '1') {
+    float[][] matrix = { { -1, -1, -1 },
+                     { -1,  8, -1 },
+                     { -1, -1, -1 } };     
+  }
   // Begin our loop for every pixel
   for (int x = xstart; x < xend; x++) {
     for (int y = ystart; y < yend; y++ ) {

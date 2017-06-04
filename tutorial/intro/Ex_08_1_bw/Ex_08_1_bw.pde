@@ -16,9 +16,7 @@ void setup() {
 
 void draw() {    
   background(0);
-  
   shader(bwShader);
-    
   translate(width/2, height/2);
   rotateY(angle);  
   shape(can);  

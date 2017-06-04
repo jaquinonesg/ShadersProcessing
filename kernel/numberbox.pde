@@ -49,7 +49,6 @@ public class NumberboxInput {
     if (!text.isEmpty()) {
       n.setValue( float( text ) );
       text = "";
-      println(n.getValue());
     } 
     else {
       n.getValueLabel().setText(""+n.getValue());

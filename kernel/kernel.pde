@@ -38,6 +38,7 @@ void draw() {
   stroke(0);
   noFill();
   rect(xstart,ystart,w,w);
+  println(n0.getValue());
 }
 
 void keyPressed(){

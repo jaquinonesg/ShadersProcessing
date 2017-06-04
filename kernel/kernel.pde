@@ -2,7 +2,7 @@
 //Interfaz grafica basada en ejemplos del repositorio https://github.com/sojamo/controlp5
 import controlP5.*;
 ControlP5 cp5;
-
+Numberbox n0,n1,n2,n3,n4,n5,n6,n7,n8;
 PImage img;
 int w = 150;
 
@@ -11,7 +11,15 @@ void setup() {
   frameRate(30);
   img = loadImage("un.jpg");
   cp5 = new ControlP5(this);
-  giveMeDahNumberBoxes();
+  n0 = giveMeDahNumberBoxes("numbers0", 40, 40, 60  ,100);
+  n1 = giveMeDahNumberBoxes("numbers1", 40, 40, 105 ,100);
+  n2 = giveMeDahNumberBoxes("numbers2", 40, 40, 150 ,100);
+  n3 = giveMeDahNumberBoxes("numbers3", 40, 40, 60 , 145);
+  n4 = giveMeDahNumberBoxes("numbers4", 40, 40, 105 ,145);
+  n5 = giveMeDahNumberBoxes("numbers5", 40, 40, 150 ,145);
+  n6 = giveMeDahNumberBoxes("numbers6", 40, 40, 60 , 190);
+  n7 = giveMeDahNumberBoxes("numbers7", 40, 40, 105 ,190);
+  n8 = giveMeDahNumberBoxes("numbers8", 40, 40, 150 ,190);
   giveDahButton();
 }
 

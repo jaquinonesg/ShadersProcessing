@@ -68,12 +68,11 @@ void draw() {
     fisheyePincushion.set("sketchSize", float(width), float(height));
     fisheyePincushion.set("amount", sin(frameCount * 0.01) * 0.5 );
     filter( fisheyePincushion );
-  }else if (key == 'u') {
-    
-    int xstart = constrain(mouseX-w/2,0,img.width);
-    int ystart = constrain(mouseY-w/2,0,img.height);
-    int xend = constrain(mouseX+w/2,0,img.width);
-    int yend = constrain(mouseY+w/2,0,img.height);
+  }else if (key == 'm') {
+    int xstart = constrain(mouseX-w/2,0,movie.width);
+    int ystart = constrain(mouseY-w/2,0,movie.height);
+    int xend = constrain(mouseX+w/2,0,movie.width);
+    int yend = constrain(mouseY+w/2,0,movie.height);
     int matrixsize = 3;
     loadPixels();
     //Blur
@@ -82,10 +81,20 @@ void draw() {
                          { 0.0625, 0.125, 0.0625 } };
     applyMatrix(xstart,ystart,xend,yend, matrix, matrixsize);
   }
+  else if (key == 'ñ') {
+    int xstart = constrain(mouseX-w/2,0,movie.width);
+    int ystart = constrain(mouseY-w/2,0,movie.height);
+    int xend = constrain(mouseX+w/2,0,movie.width);
+    int yend = constrain(mouseY+w/2,0,movie.height);
+    int matrixsize = 3;
+    loadPixels();
+    //Blur
+    float[][] matrix = { { -2, -1, 0 },
+                         { -1,  1, 1 },
+                         {  0,  1, 2 } }; 
+    applyMatrix(xstart,ystart,xend,yend, matrix, matrixsize);
+  }
 }
-
-  
-
 
 void movieEvent(Movie m) {
   m.read();
@@ -99,5 +108,4 @@ else if (key == 'r') {println("Bilateral");}
 else if (key == 't') {println("ContrastSaturationBrightness");}
 else if (key == 'y') {println("Dithering");}
 else if (key == 'u') {println("fisheyePincushion");}
-
 }

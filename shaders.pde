@@ -1,7 +1,7 @@
 // Texture from Jason Liebig's FLICKR collection of vintage labels and wrappers:
 // http://www.flickr.com/photos/jasonliebigstuff/3739263136/in/photostream/
 
-float canSize = 60;
+float canSize = 125;
 PImage label;
 PShape can;
 PShape cap;
@@ -22,9 +22,9 @@ PShader edgesShader;
 PShader embossShader;
 
 void setup() {
-  size(480, 480, P3D);  
-  label = loadImage("lachoy.jpg");
-  can = createCan(canSize, 2 * canSize, 32, label);
+  size(640, 480, P3D);  
+  label = loadImage("magritte2.jpg");
+  can = createCan(canSize, 2.5 * canSize, 32, label);
   cap = createCap(canSize, 32);
   
   colorShader = loadShader("colorfrag.glsl", "colorvert.glsl");
@@ -46,22 +46,11 @@ void setup() {
 }
 
 void draw() {    
-  background(0);
-  
-  float x = 1.88 * canSize;
-  float y = 2 * canSize;
-  int n = 0;
-  for (int i = 0; i < 3; i++) {
-    for (int j = 0; j < 3; j++) {
-      drawCan(x, y, angle);       
-      x += 2 * canSize + 8;
-      n++;
-    } 
-    x = 1.88 * canSize;
-    y += 2 * canSize + 5; 
-  } 
-
-  angle += 0.01;
+  background(0);  
+  translate(width/2, height/2);
+  rotateY(angle);  
+  shape(can);  
+  angle += 0.01; 
 }
 
 void drawCan( float centerx, float centery, float rotAngle) {

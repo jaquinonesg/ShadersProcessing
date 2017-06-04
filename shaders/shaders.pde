@@ -27,6 +27,7 @@ PShader dithering;
 PShader fisheyePincushion;
 PShader steinberg;
 PShader gaussianBlur;
+PShader pixelate;
 
 void setup() {
   size(480, 480, P3D);  
@@ -52,11 +53,11 @@ void setup() {
   fisheyePincushion = loadShader( "fisheyePincushion.glsl" );
   steinberg = loadShader("steinberg.glsl");
   gaussianBlur = loadShader("gaussianBlur.glsl");
+  pixelate = loadShader("pixelate.glsl");
   
   selShader = texlightShader;
   useLight = true;
   useTexture = true;
-  println("Vertex lights, texture shading");  
 }
 
 void draw() {    
@@ -109,7 +110,6 @@ void draw() {
     // Horizontal pass
     gaussianBlur.set("horizontalPass", 1);
     filter(gaussianBlur);
-  
   // Show the values on screen
     //noStroke();
     //fill(0, 100);
@@ -120,5 +120,22 @@ void draw() {
     useLight = false;
     useTexture = true;
     filter(gaussianBlur);
+  }else if (key == 'k') {
+    println("Pixelate");
+    selShader = pixelate;
+    pixelate.set("sketchSize", float(width), float(height));
+    float oscillation = makeEven(floor(map( sin(frameCount*0.01), -1.0, 1.0, 2, width )));
+    float offset_x = makeEven(width % oscillation * 0.5f);
+    float offset_y = makeEven(height % oscillation * 0.5f);
+    pixelate.set("pixelSize", oscillation );
+    pixelate.set("offset", offset_x, offset_y );
+    useLight = true;
+    useTexture = false;
+    filter( pixelate );
   }
+}
+
+
+int makeEven(float source) {
+  return floor(source / 2f) * 2;
 }

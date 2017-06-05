@@ -49,6 +49,6 @@ void keyPressed(){
   if (key == 'k') {println("Outlin");}
   if (key == 'l') {println("Right sobel");}
   if (key == 'ñ') {println("Sharpen");}
-  if (key == 'm') {println("Top Sobel");}
+  if (key == 'n') {println("Top Sobel");}
   if (key == 'z') {println("Input kernel");}
 }

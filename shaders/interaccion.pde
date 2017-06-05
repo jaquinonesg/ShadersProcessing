@@ -1,6 +1,5 @@
 void keyPressed() {
   if (key == 'q') {
-    label = loadImage("magritte2.jpg");
     println("No lights, no texture shading");
     selShader = colorShader;
     useLight = false;

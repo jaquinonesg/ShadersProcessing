@@ -81,6 +81,7 @@ void draw() {
     filter(ContrastSaturationBrightness);
    }else if (key == 'g') {
     println("fisheyePincushion");
+    label = loadImage("magritte.jpg");
     selShader = fisheyePincushion;
     fisheyePincushion.set("sketchSize", float(width), float(height));
     fisheyePincushion.set("amount", sin(frameCount * 0.01) * 0.5 );
@@ -89,6 +90,7 @@ void draw() {
     filter( fisheyePincushion );
   }else if (key == 'h') {
     println("steinberg");
+    label = loadImage("magritte.jpg");
     selShader = steinberg;
     steinberg.set("sketchSize", (float)width, (float)height);
     useLight = false;
@@ -96,6 +98,7 @@ void draw() {
     filter(steinberg);
   }else if (key == 'j') {
     println("gaussianBlur");
+    label = loadImage("magritte2.jpg");
     selShader = gaussianBlur;
     gaussianBlur.set("sketchSize", (float)width, (float)height);
     gaussianBlur.set("kernelSize", 32);
@@ -132,9 +135,16 @@ void draw() {
     useLight = true;
     useTexture = false;
     filter( pixelate );
+  }else if (key == 'x') {
+    useLight = false;
+    useTexture = true;
+
+  }else if (key == 'c') {
+    useLight = true;
+    useTexture = true;
+
   }
 }
-
 
 int makeEven(float source) {
   return floor(source / 2f) * 2;

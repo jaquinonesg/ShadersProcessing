@@ -1,5 +1,5 @@
 void changeKernel(int xstart,int ystart,int xend,int yend,int matrixsize){
-  if (key == 'u') {
+  if (key == 'm') {
     //Identidad
     float[][] matrix = { { 0, 0, 0 },
                          { 0, 1, 0 },
